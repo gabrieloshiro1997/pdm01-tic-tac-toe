@@ -14,6 +14,15 @@ function Board(props) {
 
   const handleClick = useCallback(
     (i) => {
+      if (winningPlayer) {
+        alert('O jogo já acabou!');
+        return;
+      }
+
+      if (squares[i]) {
+        alert('Quadrado já ocupado');
+        return;
+      }
       const newSquares = squares.slice();
       newSquares[i] = xIsNext ? 'X' : 'O';
 
