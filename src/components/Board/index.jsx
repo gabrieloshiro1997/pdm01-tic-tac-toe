@@ -12,26 +12,6 @@ function Board(props) {
     return <Square value={squares[i]} onClick={() => handleClick(i)} />;
   };
 
-  const handleClick = useCallback(
-    (i) => {
-      if (winningPlayer) {
-        alert('O jogo já acabou!');
-        return;
-      }
-
-      if (squares[i]) {
-        alert('Quadrado já ocupado');
-        return;
-      }
-      const newSquares = squares.slice();
-      newSquares[i] = xIsNext ? 'X' : 'O';
-
-      setXIsNext(!xIsNext);
-      setSquares(newSquares);
-    },
-    [squares, xIsNext]
-  );
-
   const nextPlayer = useMemo(() => {
     const player = xIsNext ? 'X' : 'O';
 
@@ -63,6 +43,25 @@ function Board(props) {
     return null;
   }, [squares]);
 
+  const handleClick = useCallback(
+    (i) => {
+      if (winningPlayer) {
+        alert('O jogo já acabou!');
+        return;
+      }
+
+      if (squares[i]) {
+        alert('Quadrado já ocupado');
+        return;
+      }
+      const newSquares = squares.slice();
+      newSquares[i] = xIsNext ? 'X' : 'O';
+
+      setXIsNext(!xIsNext);
+      setSquares(newSquares);
+    },
+    [squares, xIsNext, winningPlayer]
+  );
   return (
     <div>
       {winningPlayer && (
