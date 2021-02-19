@@ -70,6 +70,27 @@ function Board(props) {
     setSquares(cleanArray);
   }, []);
 
+  const randomSelect = useCallback(() => {
+    let randomNumber;
+
+    if (winningPlayer) {
+      alert('O jogo já acabou!');
+      return;
+    }
+
+    let alreadySelected = true;
+    while (alreadySelected) {
+      randomNumber = Math.floor(Math.random() * 9);
+
+      const notFilled = squares[randomNumber] === '';
+      if (notFilled) {
+        alreadySelected = false;
+      }
+    }
+
+    handleClick(randomNumber);
+  }, [handleClick, squares, winningPlayer]);
+
   return (
     <div>
       {winningPlayer && (
@@ -93,8 +114,21 @@ function Board(props) {
         {renderSquare(8)}
       </div>
       <div className='board-row'>
-        <Button type='button' backgroundColor='#282c34' onClick={resetGame}>
+        <Button
+          type='button'
+          backgroundColor='#282c34'
+          onClick={() => resetGame()}
+        >
           Reiniciar Partida
+        </Button>
+      </div>
+      <div className='board-row'>
+        <Button
+          type='button'
+          backgroundColor='#3085AE'
+          onClick={() => randomSelect()}
+        >
+          Jogada Aleatória
         </Button>
       </div>
     </div>
