@@ -1,5 +1,5 @@
 {
-  "name": "01-tic-tac-toe",
+  "name": "pdm01-tic-tac-toe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
