@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 
 import { Square } from '../Square';
+import { Button } from '../Button';
 
 import './styles.css';
 
@@ -62,6 +63,13 @@ function Board(props) {
     },
     [squares, xIsNext, winningPlayer]
   );
+
+  const resetGame = useCallback(() => {
+    console.log('teste');
+    const cleanArray = Array(9).fill('');
+    setSquares(cleanArray);
+  }, []);
+
   return (
     <div>
       {winningPlayer && (
@@ -83,6 +91,11 @@ function Board(props) {
         {renderSquare(6)}
         {renderSquare(7)}
         {renderSquare(8)}
+      </div>
+      <div className='board-row'>
+        <Button type='button' backgroundColor='#282c34' onClick={resetGame}>
+          Reiniciar Partida
+        </Button>
       </div>
     </div>
   );
