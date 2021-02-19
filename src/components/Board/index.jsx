@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import { Square } from '../Square';
 
@@ -14,14 +14,21 @@ function Board(props) {
 
   const handleClick = (i) => {
     const newSquares = squares.slice();
-    newSquares[i] = xIsNext ? 'x' : 'o';
+    newSquares[i] = xIsNext ? 'X' : 'O';
 
     setXIsNext(!xIsNext);
     setSquares(newSquares);
   };
 
+  const nextPlayer = useMemo(() => {
+    const player = xIsNext ? 'X' : 'O';
+
+    return player;
+  }, [xIsNext]);
+
   return (
     <div>
+      <div className='status'>Jogador: {nextPlayer}</div>
       <div className='board-row'>
         {renderSquare(0)}
         {renderSquare(1)}
