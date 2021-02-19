@@ -6,6 +6,7 @@ import './styles.css';
 
 function Board(props) {
   const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
 
   const renderSquare = (i) => {
     return <Square value={squares[i]} onClick={() => handleClick(i)} />;
@@ -13,7 +14,9 @@ function Board(props) {
 
   const handleClick = (i) => {
     const newSquares = squares.slice();
-    newSquares[i] = 'x';
+    newSquares[i] = xIsNext ? 'x' : 'o';
+
+    setXIsNext(!xIsNext);
     setSquares(newSquares);
   };
 
